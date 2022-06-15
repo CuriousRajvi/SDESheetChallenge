@@ -16,26 +16,25 @@
         };
 
 *****************************************************************/
-Node *intersectionPresent(Node *firstHead, Node *secondHead){
-    while(secondHead!=NULL){
-        Node *temp=firstHead;
-        while(temp!=NULL){
-            if(temp==secondHead) return secondHead;
-            temp=temp->next;
-        }
-        secondHead=secondHead->next;
-    }
-    return NULL;
-
-}
-int findIntersection(Node *firstHead, Node *secondHead)
+int findIntersection(Node *first, Node *second)
 {
     //Write your code here
-    int data;
-    Node *intersect=intersectionPresent(firstHead,secondHead);
-        if(intersect==NULL)
-            data=-1;
+    if(first==NULL || second==NULL)
+        return NULL;
+    Node *f=first;
+    Node *s=second;
+    while(f!=s){
+        if(f==NULL)
+            f=second;
         else
-            data=intersect->data;
-    return data;
+            f=f->next;
+        if(s==NULL)
+            s=first;
+        else
+            s=s->next;
+        }
+    if(f==NULL)
+        return -1;
+    else
+        return f->data;
     }
